@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface CustomerRepository {
 
-    Customer save(Customer pizza);
+    Customer save(Customer customer);
     List<Customer> findAll();
     Customer findById (long id);
-    void update (Customer pizza);
+    void update (Customer customer);
     void deleteById(long Id);
 
 

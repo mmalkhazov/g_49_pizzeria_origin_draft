@@ -23,64 +23,74 @@ public class Customer {
         this.isActive = isActive;
     }
 
+    public Customer(String name) {// coздаем из-за метода "public void save" в классе CustomerServiceImpl
+        this.name = name;
 
+    }
+
+    public Customer(long id, String name) {// coздаем из-за метода "public void updateCustomer" в классе CustomerServiceImpl
+        this.id = id;
+        this.name = name;
+
+    }
 
 //    ФУНКЦИОНАЛ.ПОКУПАТЕЛЯ ЕГО ПОВЕДЕНИЕ
 
 //    Добавить продукт в свой список если активный
 
-    public void addPizza(Pizza pizza){
-        if(pizza.isActive()){
+    public void addPizza(Pizza pizza) {
+        if (pizza.isActive()) {
             pizzaList.add(pizza);
         }
     }
 
 //    Получение всех продуктов , находящихся в списке активных
 
-    public List<Pizza> getAllActivePizzas(){
+    public List<Pizza> getAllActivePizzas() {
         return pizzaList
                 .stream()
-                .filter(x->x.isActive())
+                .filter(x -> x.isActive())
                 .toList();
     }
 
 
-//    Удалить продукт из списка по его идентификатору
-public void deletePizzaById(long Id){
-        Iterator<Pizza> iterator =pizzaList.iterator();
-        while(iterator.hasNext()){
-            Pizza currentPizza=iterator.next();
-            if(currentPizza.getId()== id){
+    //    Удалить продукт из списка по его идентификатору
+    public void deletePizzaById(long Id) {
+        Iterator<Pizza> iterator = pizzaList.iterator();
+        while (iterator.hasNext()) {
+            Pizza currentPizza = iterator.next();
+            if (currentPizza.getId() == id) {
                 iterator.remove();
                 break;
             }
         }
-}
-//Полная очистка списка удаление всех продуктов
-public void clearAllPizzas(){
+    }
+
+    //Полная очистка списка удаление всех продуктов
+    public void clearAllPizzas() {
         pizzaList.clear();
-}
-//Получение общей стоимости списка активных продуктов
-public double getActivePizzasTotalPrice(){
+    }
+
+    //Получение общей стоимости списка активных продуктов
+    public double getActivePizzasTotalPrice() {
         return pizzaList
                 .stream()
-                .filter(x->x.isActive())
-                .mapToDouble(x->x.getPrice())
+                .filter(x -> x.isActive())
+                .mapToDouble(x -> x.getPrice())
                 .sum();
-}
+    }
 
 
-//Получение средней стоимости товара в списке из активных продуктов
-public double getActivePizzasAveragePrice(){
+    //Получение средней стоимости товара в списке из активных продуктов
+    public double getActivePizzasAveragePrice() {
         return pizzaList
                 .stream()
-                .filter(x->x.isActive())
-                .mapToDouble(x->x.getPrice())
+                .filter(x -> x.isActive())
+                .mapToDouble(x -> x.getPrice())
                 .average()
                 .orElse(0.0);
 
-}
-
+    }
 
 
     public long getId() {
@@ -147,8 +157,6 @@ public double getActivePizzasAveragePrice(){
 
         return builder.toString();
     }
-
-
 
 
 }

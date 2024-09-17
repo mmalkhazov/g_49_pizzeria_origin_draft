@@ -1,6 +1,7 @@
 package pizzeria.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import pizzeria.domain.Pizza;
 
 import java.io.File;
@@ -18,6 +19,8 @@ public class PizzaRepositoryFile implements PizzaRepository {
     public PizzaRepositoryFile() {
         database = new File("pizza_database.txt");
         mapper = new ObjectMapper();
+
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
         try {
             database.createNewFile();

@@ -12,9 +12,11 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository repository;
     private PizzaRepository pizzaRepository;
 
-    public CustomerServiceImpl(CustomerRepository repository) {
+    public CustomerServiceImpl(CustomerRepository repository,PizzaRepository pizzaRepository ) {
 
         this.repository = repository;
+        this.pizzaRepository = pizzaRepository ;
+
     }
 
 

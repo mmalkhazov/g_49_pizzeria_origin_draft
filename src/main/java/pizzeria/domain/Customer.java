@@ -1,5 +1,7 @@
 package pizzeria.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -41,11 +43,13 @@ public class Customer {
     public void addPizza(Pizza pizza) {
         if (pizza.isActive()) {
             pizzaList.add(pizza);
+            System.out.println("Pizza is added");
         }
     }
 
 //    Получение всех продуктов , находящихся в списке активных
 
+    @JsonIgnore
     public List<Pizza> getAllActivePizzas() {
         return pizzaList
                 .stream()
@@ -55,7 +59,7 @@ public class Customer {
 
 
     //    Удалить продукт из списка по его идентификатору
-    public void deletePizzaById(long Id) {
+    public void deletePizzaById(long id) {
         Iterator<Pizza> iterator = pizzaList.iterator();
         while (iterator.hasNext()) {
             Pizza currentPizza = iterator.next();
@@ -71,7 +75,8 @@ public class Customer {
         pizzaList.clear();
     }
 
-    //Получение общей стоимости списка активных продуктов
+    //Получение общей стоимости списка активных продуктовson
+    @JsonIgnore
     public double getActivePizzasTotalPrice() {
         return pizzaList
                 .stream()
@@ -82,6 +87,7 @@ public class Customer {
 
 
     //Получение средней стоимости товара в списке из активных продуктов
+    @JsonIgnore
     public double getActivePizzasAveragePrice() {
         return pizzaList
                 .stream()

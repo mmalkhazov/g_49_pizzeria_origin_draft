@@ -1,6 +1,7 @@
 package pizzeria.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import pizzeria.domain.Customer;
 import pizzeria.domain.Pizza;
 
@@ -21,6 +22,8 @@ public class CustomerRepositoryFile implements CustomerRepository{
     public CustomerRepositoryFile() {
         database = new File("customer_database.txt");
         mapper = new ObjectMapper();
+
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
         try {
             database.createNewFile();
@@ -79,6 +82,7 @@ public class CustomerRepositoryFile implements CustomerRepository{
     @Override
     public void update(Customer customer) {
         List<Customer> customersList = findAll();
+//        List<Customer> pizzasList = findAll();
 
         customersList
                 .stream()
@@ -87,6 +91,10 @@ public class CustomerRepositoryFile implements CustomerRepository{
                 .forEach(x -> {
                     x.setName(customer.getName());
                     x.setActive(true);
+//                    if(!customer.getPizzaList().isEmpty()){
+//                        x.setPizzaList(customer.getPizzaList());
+//                    }
+                    x.setPizzaList(customer.getPizzaList());
 
                 });
         try {
